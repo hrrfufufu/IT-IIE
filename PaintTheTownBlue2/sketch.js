@@ -25,6 +25,11 @@ function setup() {
     background_music.volume = 0.2;
     gameover_se.volume = 0.45;
     kill_se.volume = 0.45;
+    background_music.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+        }, false);
+    
 
     document.getElementById('startButton').addEventListener('click', function() {
         gameStarted = true;
@@ -223,7 +228,7 @@ function setup() {
                 fill(this.color5);
                 triangle(this.x - 20, this.y - 115, this.x, this.y - 100, this.x + 20, this.y - 115);
                 triangle(this.x - 22, this.y - 90, this.x - 19, this.y - 125, this.x + 2, this.y - 115);
-                triangle(this.x - 2, this.y - 115, this.x + 19, this.y - 130, this.x + 22, this.y - 90);
+                triangle(this.x - 2, this.y - 115, this.x + 19, this.y - 125, this.x + 22, this.y - 90);
                 triangle(this.x - 33, this.y - 100, this.x - 19, this.y - 70, this.x, this.y - 115);
                 fill(64, 58, 76);
                 rect(this.x - 20, this.y - 75, this.width, 60);
@@ -563,6 +568,8 @@ function setup() {
                         this.speed = random(2,5);
                         if (score > 60)
                         this.speed = random(8,10)
+                        if (score > 100)
+                        this.speed = random(100)
                         this.respawnTimer = null;
                         this.lastX = null;
                     }
