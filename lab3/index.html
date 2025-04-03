@@ -1,0 +1,60 @@
+<!-- index.html (без изменений) -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="p5.js"></script>
+    <script src="sketch.js"></script>
+    <style>
+      #startButton {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px 30px;
+        font-size: 20px;
+        border-radius: 10px;
+        border: none;
+        background-color: #2a72c5;
+        color: white;
+        cursor: pointer;
+      }
+
+      #restartButton {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px 30px;
+        font-size: 20px;
+        border-radius: 10px;
+        border: none;
+        background-color: #4d4d4d;
+        color: white;
+        cursor: pointer;
+        display: none;
+      }
+
+      .slider-container {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        color: #2a72c5;
+      }
+
+      .slider-container label {
+        display: block;
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="startButton">Start Game</button>
+    <button id="restartButton">Paint Blue!</button>
+    <div class="slider-container">
+      <label for="musicVolume">PAINTTHETOWNBLUERIOTSALLAROUNDYOUOLDKDFLKSFKLSKDFKS Volume</label>
+      <input type="range" id="musicVolume" min="0" max="0.5" step="0.001" value="0.2">
+      <label for="soundVolume">Pew-Pow Volume</label>
+      <input type="range" id="soundVolume" min="0" max="1" step="0.001" value="0.45">
+    </div>
+  </body>
+</html>
