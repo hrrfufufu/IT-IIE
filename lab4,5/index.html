@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="p5.js"></script>
+    <script src="sketch.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: 'Press Start 2P', cursive;
+        background-color: #121212;
+      }
+
+      #startButton {
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px 40px;
+        font-size: 24px;
+        border-radius: 10px;
+        border: 4px solid #e84178;
+        background: linear-gradient(45deg, #e84178, #9c27b0);
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 0 0 20px #e84178, 
+                    0 0 30px #9c27b0,
+                    inset 0 0 10px rgba(255,255,255,0.3);
+        text-shadow: 0 0 5px #fff;
+        transition: all 0.3s ease;
+        z-index: 100;
+        letter-spacing: 2px;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      #startButton:hover {
+        transform: translate(-50%, -50%) scale(1.05);
+        box-shadow: 0 0 25px #e84178, 
+                    0 0 35px #9c27b0,
+                    inset 0 0 15px rgba(255,255,255,0.4);
+      }
+
+      #startButton:active {
+        transform: translate(-50%, -50%) scale(0.98);
+        background: linear-gradient(45deg, #d1336b, #8c1fa1);
+      }
+
+      #restartButton {
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px 40px;
+        font-size: 24px;
+        border-radius: 10px;
+        border: 4px solid #4a69bd;
+        background: linear-gradient(45deg, #4a69bd, #6a89cc);
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 0 0 20px #4a69bd, 
+                    0 0 30px #6a89cc,
+                    inset 0 0 10px rgba(255,255,255,0.3);
+        text-shadow: 0 0 5px #fff;
+        transition: all 0.3s ease;
+        display: none;
+        z-index: 100;
+        letter-spacing: 2px;
+        opacity: 0;
+        animation: fadeIn 0.5s forwards 0.5s;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      @keyframes fadeIn {
+        to { opacity: 1; }
+      }
+
+      #restartButton:hover {
+        transform: translate(-50%, -50%) scale(1.05);
+        box-shadow: 0 0 25px #4a69bd, 
+                    0 0 35px #6a89cc,
+                    inset 0 0 15px rgba(255,255,255,0.4);
+      }
+
+      #restartButton:active {
+        transform: translate(-50%, -50%) scale(0.98);
+        background: linear-gradient(45deg, #3c56a8, #5a77c2);
+      }
+
+      .slider-container {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        color: white;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 15px;
+        border: 3px solid #e84178;
+        backdrop-filter: blur(5px);
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 100;
+        box-shadow: 0 0 15px rgba(232, 65, 120, 0.5);
+        pointer-events: none;
+      }
+
+      .slider-container.visible {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .slider-container label {
+        display: block;
+        margin-bottom: 15px;
+        font-size: 14px;
+        color: #fff;
+        text-shadow: 0 0 5px #e84178;
+      }
+
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 10px;
+        border-radius: 5px;
+        background: linear-gradient(90deg, #e84178, #9c27b0);
+        outline: none;
+        margin-bottom: 25px;
+        box-shadow: 0 0 5px rgba(232, 65, 120, 0.8);
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #fff;
+        cursor: pointer;
+        box-shadow: 0 0 10px #e84178;
+        border: 2px solid #e84178;
+        transition: all 0.2s ease;
+      }
+
+      input[type="range"]::-webkit-slider-thumb:hover {
+        transform: scale(1.1);
+        background: #5a77c2;
+      }
+
+      .volume-icon {
+        display: inline-block;
+        margin-right: 10px;
+        font-size: 18px;
+        vertical-align: middle;
+        color: #e84178;
+        text-shadow: 0 0 5px #e84178;
+      }
+
+      .paint-splatter {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.7;
+        z-index: 90;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="startButton">START GAME</button>
+    <button id="restartButton">PLAY AGAIN</button>
+    <div class="slider-container">
+      <label for="musicVolume"><span class="volume-icon">🔊</span> MUSIC VOLUME</label>
+      <input type="range" id="musicVolume" min="0" max="0.5" step="0.001" value="0.2">
+      <label for="soundVolume"><span class="volume-icon">🎵</span> SOUND VOLUME</label>
+      <input type="range" id="soundVolume" min="0" max="1" step="0.001" value="0.45">
+    </div>
+  </body>
+</html>
